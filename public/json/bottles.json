@@ -1,0 +1,42 @@
+[
+  {
+    "id": 0,
+    "name": "Mediterranean fruit",
+    "picture": "../images/product/bottle1.jpg",
+    "olives": "Picual",
+    "flavour": "green, bitter",
+    "year": "2022-2023",
+    "location": "Granada, Spain",
+    "price": "0.065 ETH"
+  },
+  {
+    "id": 1,
+    "name": "Bottled Sun",
+    "picture": "../images/product/bottle2.jpg",
+    "olives": "Royal",
+    "flavour": "green, bitter",
+    "year": "2022-2023",
+    "location": "Granada, Spain",
+    "price": "0.065 ETH"
+  },
+  {
+    "id": 2,
+    "name": "Golden flower",
+    "picture": "../images/product/bottle3.jpg",
+    "olives": "Arbequina",
+    "flavour": "green, bitter",
+    "year": "2022-2023",
+    "location": "Granada, Spain",
+    "price": "0.065 ETH"
+  },
+  {
+    "id": 3,
+    "name": "Fountain of Youth",
+    "picture": "../images/product/bottle4.jpg",
+    "olives": "Cornicabra",
+    "flavour": "green, bitter",
+    "year": "2022-2023",
+    "location": "Granada, Spain",
+    "price": "0.065 ETH"
+  }
+]
