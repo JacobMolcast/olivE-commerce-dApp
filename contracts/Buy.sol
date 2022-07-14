@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 contract Buy {
     address[16] public buyers;
 
-    // Adopting a bottle
+    // Buy a bottle
     function buy(uint256 bottleId) public returns (uint256) {
         require(bottleId >= 0 && bottleId <= 15);
 
