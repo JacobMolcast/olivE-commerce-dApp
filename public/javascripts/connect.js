@@ -2,7 +2,7 @@ BottleApp = {
   web3Provider: null,
   contracts: {},
 
-  init: await function () {
+  init: async function () {
     // Load bottles.
     $.getJSON('../json/bottles.json', function (data) {
       var bottlesRow = $('#bottlesRow');
@@ -52,76 +52,81 @@ BottleApp = {
   },
 
   initContract: function () {
-    const ABI = [
-      {
-        "inputs": [],
-        "name": "deposit",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "address payable",
-            "name": "_to",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "_amount",
-            "type": "uint256"
-          }
-        ],
-        "name": "withdraw",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [],
-        "name": "getAddress",
-        "outputs": [
-          {
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [],
-        "name": "getBalance",
-        "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      }
-    ];
+    function contractIntro (){
+      const ABI = [
+        {
+          "inputs": [],
+          "name": "deposit",
+          "outputs": [],
+          "stateMutability": "payable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address payable",
+              "name": "_to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "withdraw",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "getAddress",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "getBalance",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ];
 
-    const Address = "0xf0dc01a14e7A1e5802E2465af6F85bf5c6854b43"; // Taking Address from Remix
+      const Address = "0xC24f436BFCbA05Bd6A2Ef72FE41894476710a2d4"; // Taking Address from Remix
       //window.web3 = await new Web3(window.ethereum);
-      // Get the necessary contract artifact file and instantiate it with @truffle/contract
-      BottleApp.contracts.Buy = new window.web3.eth.Contract(ABI, Address);
-      //document.getElementById("contractArea").innerHTML = "Connected to Contract"; // calling the elementID above
-      // Set the provider for our contract
-      BottleApp.contracts.Buy.setProvider(BottleApp.web3Provider);
+      //window.contract = await new window.web3.eth.Contract(ABI, Address);
+        //window.web3 = await new Web3(window.ethereum);
+        // Get the necessary contract artifact file and instantiate it with @truffle/contract
+        BottleApp.contracts.Buy = new window.web3.eth.Contract(ABI, Address);
+        //document.getElementById("contractArea").innerHTML = "Connected to Contract"; // calling the elementID above
+        // Set the provider for our contract
+        BottleApp.contracts.Buy.setProvider(BottleApp.web3Provider);
 
-      // Use our contract to retrieve and mark the Buyed bottles
-      BottleApp.markBuyed();
-    });
+        // Use our contract to retrieve and mark the Buyed bottles
+        return BottleApp.markBuyed();
+      };
+
+        return BottleApp.bindEvents();
+    }
 
 
-    return BottleApp.bindEvents();
   },
-
+////////////////////////////////////////////////////////////////ISSUE HERE
 
   bindEvents: function () {
     $(document).on('click', '.btn-buy', BottleApp.handleBuy);
