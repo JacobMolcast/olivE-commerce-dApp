@@ -26,29 +26,12 @@ BottleApp = {
   },
 
   initWeb3: async function () {
-    // Modern dapp browsers...
-    if (window.ethereum) {
-      BottleApp.web3Provider = window.ethereum;
-      try {
-        // Request account access
-        await window.ethereum.request({ method: "eth_requestAccounts" });
-        //document.getElementById("userArea").innerHTML = `User Account: ${account}`;;//added new
-      } catch (error) {
-        // User denied account access...
-        console.error("User denied account access")
-      }
-    }
-    // Legacy dapp browsers...
-    else if (window.web3) {
-      BottleApp.web3Provider = window.web3.currentProvider;
-    }
-    // If no injected web3 instance is detected, fall back to Ganache
-    else {
-      BottleApp.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
-    }
-    web3 = new Web3(BottleApp.web3Provider);
-
+    let account;
+    if(window.ethereum !== "undefined") {
+        const accounts = await ethereum.request({method: "eth_requestAccounts"});
+        account = accounts[0];
     return BottleApp.initContract();
+  }
   },
 
   initContract: function () {
@@ -113,12 +96,14 @@ BottleApp = {
       	}
       ];
 
-      const Address = "0x1dc314E485ECB172863a6AFcE082D2e717f3722a"; // Taking Address from Remix
+      const Address = "0x37eca0a7A36a3ccAd0Eb7D11B4c6fc69Bc880068"; // Taking Address from Remix
       //window.web3 = await new Web3(window.ethereum);
       //window.contract = await new window.web3.eth.Contract(ABI, Address);
       //window.web3 = await new Web3(window.ethereum);
       // Get the necessary contract artifact file and instantiate it with @truffle/contract
-      BottleApp.contracts.Buy = new window.web3.eth.Contract(ABI, Address);
+      window.web3 = new Web3(window.ethereum);
+      window.contract = window.web3.eth.Contract(ABI, Address);
+      BottleApp.contracts.Buy = window.contract;
       //document.getElementById("contractArea").innerHTML = "Connected to Contract"; // calling the elementID above
       // Set the provider for our contract
       //BottleApp.contracts.Buy.setProvider(BottleApp.web3Provider);
@@ -129,13 +114,13 @@ BottleApp = {
       //BottleApp.markBuyed();
 
       return BottleApp.bindEvents();
-    }
+
 
 
   },
 ////////////////////////////////////////////////////////////////ISSUE HERE
 
-  .bindEvents: function () {
+  bindEvents: function () {
     $(document).on('click', '.btn-buy', BottleApp.handleBuy);
   },
 
@@ -193,6 +178,8 @@ $(function () {
     BottleApp.init();
   });
 });
+
+/*
 
 <!DOCTYPE html>
 <html>
@@ -365,3 +352,4 @@ $(function () {
 
 </body>
 </html>
+*/
