@@ -2,7 +2,7 @@
 
 BottleApp = {
   //web3Provider: null,
-  //contract: {},
+  contract: {},
   account: null,
 
   /*get getAccount(){
@@ -39,8 +39,9 @@ BottleApp = {
 
   initWeb3: async function () {
     if(window.ethereum !== "undefined") {
-        const accounts = await ethereum.request({method: "eth_accounts"});
+        const accounts = await ethereum.request({method: "eth_requestAccounts"});
         this.account = accounts[0];
+        console.log('accountConnect');
         console.log(this.account);
         //BottleApp.changeAccount = account;
         //this.account = account;
@@ -49,7 +50,7 @@ BottleApp = {
   },
 
   initContract: async function (){
-    $(async function () {
+   //$(async function () {
       const ABI = [
           {
             "inputs": [],
@@ -104,15 +105,19 @@ BottleApp = {
           }
         ];
 
-      const Address = "0x09867458608102e7FC9AeC2cB74da60969876FbA"; // Taking Address from Remix
+      const Address = "0x4BED5de435a57D16EA4d5Ef5E9688277e6A6dCBa"; // Taking Address from Remix
       //window.web3 = await new Web3(window.ethereum);
       //window.contract = await new window.web3.eth.Contract(ABI, Address);
       //window.web3 = await new Web3(window.ethereum);
       // Get the necessary contract artifact file and instantiate it with @truffle/contract
       window.web3 = await new Web3(window.ethereum);
       window.contract = await new window.web3.eth.Contract(ABI, Address);
-      return BottleApp.handleBuy();
-    })
+      this.contract = window.contract;
+      console.log('contractConnect');
+      console.log(this.account);
+      console.log(this.contract);
+    //  return BottleApp.markBuyed();
+    //})
       //window.web3 = new Web3(window.ethereum);
       //window.contract = window.web3.eth.Contract(ABI, Address);
 
@@ -130,8 +135,8 @@ BottleApp = {
   },
 
   bindEvents: function () {
-    $(document).on('click', '.btn-buy');
-    console.log(this.account);
+    $(document).on('click', '.btn-buy', BottleApp.handleBuy(this.account, window.contract));
+    console.log('bindEvents');
     console.log(this.account);
     /*const amount = 10000000000000000000;
     const account = this.account;
@@ -139,6 +144,35 @@ BottleApp = {
     console.log(this.account);
     window.contract.methods.deposit().send({from: this.account, value: amount});*/
   },
+
+  markBuyed: function () {
+    var buyInstance;
+
+  App.contracts.Buy.deployed().then(function (instance) {
+    buyInstance = instance;
+
+    return buyInstance.getBuyers.call();
+  }).then(function (buyers) {
+    for (i = 0; i < buyers.length; i++) {
+      if (buyers[i] !== '0x0000000000000000000000000000000000000000') {
+        $('.panel-bottle').eq(i).find('button').text('Success').attr('disabled', true);
+      }
+    }
+  }).catch(function (err) {
+    console.log(err.message);
+  });
+
+    console.log('markBuyed');
+    console.log(this.account);
+    console.log(window.contract);
+  //  const account = this.account;
+  //  #ffc800
+
+    //return account;
+    //const window.contract = this.window.contract;
+    //account = this.account
+  },
+
 /*
   markBuyed: function () {
     var buyInstance;
@@ -159,16 +193,20 @@ BottleApp = {
 
   },
 */
-  handleBuy: function (event) {
+  handleBuy: function (account, contract) {
+    /*const btn = document.getElementById('button-color');
+    btn.addEventListener('click', function onClick()){
     event.preventDefault();
-    var bottleId = parseInt($(event.target).data('id'));
+    //var bottleId = parseInt($(event.target).data('id'));  }*/
     const amount = 10000000000000000000;
-    const account = this.account;
+    //const account = this.account;
+    console.log('handleBuy');
     console.log(this.account);
-    console.log(this.account);
-    window.contract.methods.deposit().send({from: this.account, value: amount});
-    //BottleApp.init();
+    contract.methods.deposit().send({from: account, value: amount});
+    return BottleApp.markBuyed();
 
+    //BottleApp.init();
+    //BottleApp.markBuyed();
 }
 
 //BottleApp.init();
