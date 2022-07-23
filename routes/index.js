@@ -1,12 +1,40 @@
 var express = require('express');
+//var Tx = require('ethereumjs-tx').Transaction
+
+var router = express.Router();
+//const Web3 = require('web3')
+//const rpcURL = 'http://127.0.0.1:7545/'
+//const web3 = new Web3(rpcURL)
+
+router.post('/', async function (req, res, next) {
+  //const address = req.body.address
+  //var wei = await web3.eth.getBalance(address)
+//  balance = web3.utils.fromWei(wei, 'ether')
+
+  res.render('index');
+});
+
+router.get('/', async function (req, res, next) {
+
+  res.render('index');
+});
+
+
+module.exports = router;
+
+
+/*var express = require('express');
 var router = express.Router();
 const path = require('path');
 
-/* GET users listing. */
+// GET users listing.
 router.get('/', async function(req,res, next){
   res.sendFile(path.join(__dirname+'../../public/html/index.html'));
   //__dirname : It will resolve to your project folder.
+
 });
+
+*/
 
 /*
 App = {
@@ -138,4 +166,4 @@ $(function () {
 });
 
 */
-module.exports = router;
+//module.exports = router;
