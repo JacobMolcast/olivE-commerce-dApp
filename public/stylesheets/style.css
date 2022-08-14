@@ -12269,19 +12269,19 @@ header.masthead .masthead-heading {
   }
 }
 
-#proposal .proposal-item {
+#project .project-item {
   max-width: 26rem;
   margin-left: auto;
   margin-right: auto;
 }
 
-#proposal .proposal-item .proposal-link {
+#project .project-item .project-link {
   position: relative;
   display: block;
   margin: 0 auto;
 }
 
-#proposal .proposal-item .proposal-link .proposal-hover {
+#project .project-item .project-link .project-hover {
   display: flex;
   position: absolute;
   width: 100%;
@@ -12293,69 +12293,69 @@ header.masthead .masthead-heading {
   transition: opacity ease-in-out 0.25s;
 }
 
-#proposal .proposal-item .proposal-link .proposal-hover .proposal-hover-content {
+#project .project-item .project-link .project-hover .project-hover-content {
   font-size: 1.25rem;
   color: white;
 }
 
-#proposal .proposal-item .proposal-link:hover .proposal-hover {
+#project .project-item .project-link:hover .project-hover {
   opacity: 1;
 }
 
-#proposal .proposal-item .proposal-caption {
+#project .project-item .project-caption {
   padding: 1.5rem;
   text-align: center;
   background-color: #fff;
 }
 
-#proposal .proposal-item .proposal-caption .proposal-caption-heading {
+#project .project-item .project-caption .project-caption-heading {
   font-size: 1.5rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   margin-bottom: 0;
 }
 
-#proposal .proposal-item .proposal-caption .proposal-caption-subheading {
+#project .project-item .project-caption .project-caption-subheading {
   font-style: italic;
   font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-.proposal-modal .modal-dialog {
+.project-modal .modal-dialog {
   margin: 1rem;
   max-width: 100vw;
 }
 
-.proposal-modal .modal-content {
+.project-modal .modal-content {
   padding-top: 6rem;
   padding-bottom: 6rem;
   text-align: center;
 }
 
-.proposal-modal .modal-content h2,
-.proposal-modal .modal-content .h2 {
+.project-modal .modal-content h2,
+.project-modal .modal-content .h2 {
   font-size: 3rem;
   line-height: 3rem;
 }
 
-.proposal-modal .modal-content p.item-intro {
+.project-modal .modal-content p.item-intro {
   font-style: italic;
   margin-bottom: 2rem;
   font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-.proposal-modal .modal-content p {
+.project-modal .modal-content p {
   margin-bottom: 2rem;
 }
 
-.proposal-modal .modal-content ul.list-inline {
+.project-modal .modal-content ul.list-inline {
   margin-bottom: 2rem;
 }
 
-.proposal-modal .modal-content img {
+.project-modal .modal-content img {
   margin-bottom: 2rem;
 }
 
-.proposal-modal .close-modal {
+.project-modal .close-modal {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
@@ -12366,7 +12366,7 @@ header.masthead .masthead-heading {
   contactForm
 }
 
-.proposal-modal .close-modal:hover {
+.project-modal .close-modal:hover {
   opacity: 0.3;
 }
 
@@ -12597,9 +12597,13 @@ header.masthead .masthead-heading {
   height: 2.75rem;
 }
 
+div.preview-images > img {
+      width: 30%;
+    }
+
 section#contact {
   background-color: #212529;
-  background-image: url("../images/main/olives.png");
+  background-image: url("../images/main/olives.jpg");
   background-repeat: no-repeat;
   background-position: center;
 }

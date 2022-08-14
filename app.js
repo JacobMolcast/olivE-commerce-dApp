@@ -2,31 +2,43 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
+var fs = require('fs');
+require('dotenv/config');
 
 var indexRouter = require('./routes/index');
-var checkBalanceRouter = require('./routes/checkBalance');
-var usersRouter = require('./routes/users');
-var sendEthRouter = require('./routes/sendEth');
 var loginRouter = require('./routes/login');
 
 var app = express();
 
+// connect to MongoDB
+mongoose
+.connect("mongodb+srv://x18157807:122Ireland@cluster0.o89ilnf.mongodb.net/?retryWrites=true&w=majority", {
+})
+.then(() => console.log("MongoDB has been connected"))
+.catch((err) => console.log(err));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// define routes
 app.use('/', indexRouter);
-app.use('/checkBalance', checkBalanceRouter);
-app.use('/users', usersRouter);
-app.use('/sendEth', sendEthRouter);
 app.use('/login', loginRouter);
+
+// convert messages to json
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+// Set EJS as templating engine
+app.set("view engine", "ejs");
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

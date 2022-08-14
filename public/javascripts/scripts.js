@@ -53,6 +53,8 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
+
+// enable contact form when required fields are correctly filled
 function validate() {
     var name = document.getElementById("name");
     var email = document.getElementById("email");

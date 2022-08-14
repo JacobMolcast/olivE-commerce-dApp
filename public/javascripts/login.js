@@ -2,7 +2,7 @@
 
 let account;
 const contract = {};
-//if a Metamask plugin is installed, this will connect and select the account
+
 //if a Metamask plugin is installed, this will connect and select the account
 async function initWeb3(){
   if(window.ethereum !== "undefined") {
@@ -486,17 +486,7 @@ async function chargeMethods(){
     }
     document.getElementById("tokenBalanceOf").innerHTML = res;
     });
-/*
-//Creo que para poder acceder a esta variable tengo que crear una funcion get
-    window.contract.methods.bottlePrice(account).call(function (err, res){
-      if (err) {
-        console.log("An error occured", err)
-        document.getElementById("bottlePrice").innerHTML = err;
-        return
-      }
-      document.getElementById("bottlePrice").innerHTML = res;
-      });
-*/
+
   //harvestState
   window.contract.methods.harvestState().call(function (err, res){
     if (err) {
@@ -507,15 +497,9 @@ async function chargeMethods(){
     document.getElementById("harvestState").innerHTML = res;
     });
 
-
-
 }
 
-
-
-
-
-
+// token transfer
 const transferTheToken = async () => {
   initWeb3();
   const addressTo = document.getElementById("addressTo").value;
@@ -536,29 +520,26 @@ const transferTheToken = async () => {
   document.getElementById("transferToken").innerHTML = "Hash of the transaction: " + res;
 });
 }
-//https://ethereum.org/en/developers/tutorials/calling-a-smart-contract-from-javascript/
-/*
-contract.methods.buyToken().send({from: account, value: amount});
-contract.methods.ChangeharvestStatus().send({from: account});
-contract.methods.tokenBalanceOf(account).send({from: account});
-setMaxSupply(uint256 maxSupply_)
-toggleIsBuyEnabled()
 
-ownerOf(tokenId)
+//preview image selected to upload
+$(document).ready(function() {
+  let imagesPreview = function(input, placeToInsertImagePreview) {
+    if (input.files) {
+      let filesAmount = input.files.length;
+      for (i = 0; i < filesAmount; i++) {
+        let reader = new FileReader();
+        reader.onload = function(event) {
+          $($.parseHTML("<img>"))
+            .attr("src", event.target.result)
+            .appendTo(placeToInsertImagePreview);
+        };
+        reader.readAsDataURL(input.files[i]);
+      }
+    }
+  };
+  $("#documentation").on("change", function() {
+    imagesPreview(this, "div.preview-images");
+  });
+});
 
-safeTransferFrom (
-        address from,
-        address to,
-        uint256 tokenId,
-        address buyer
-
-bottlePrice
-isBuyEnabled
-totalSupply
-maxSupply
-name
-symbol
-owner
-ownerOf(tokenID)
-*/
 initWeb3();
